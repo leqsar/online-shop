@@ -42,7 +42,7 @@ class ProductPage extends React.Component {
           <span className="product-page__price">{this.props.product.prices[0].currency}{this.props.product.prices[0].amount}</span>
           <button
             className="product-page__add-to-card-button"
-            >add to cart</button>
+            onClick={this.props.handleAddToCartClick}>add to cart</button>
           <div className="description" dangerouslySetInnerHTML={{__html: this.props.product.description}}>
           </div>
         </div>

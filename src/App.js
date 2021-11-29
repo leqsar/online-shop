@@ -18,6 +18,7 @@ class App extends React.Component {
       headerCartIconIsClicked: false,
       choosenProduct: ''
     }
+    this.handleProductClick = this.handleProductClick.bind(this);
     this.handleHomePageClick = this.handleHomePageClick.bind(this);
     this.handleHeaderCartClick = this.handleHeaderCartClick.bind(this);
   }
@@ -57,6 +58,41 @@ class App extends React.Component {
     });
   }
 
+  handleProductClick(e) {
+    this.props.client
+    .query({
+      query: gql`
+        query {
+          product(id: "${e.currentTarget.id}"){
+            name,
+            brand,
+            prices {
+              currency,
+              amount
+            },
+            description
+            inStock,
+            gallery,
+            category,
+            attributes {
+              name,
+              type,
+              items {
+                value
+              }
+            }
+          }
+        }`
+    })
+    .then((result) => {
+      this.setState({
+        choosenProduct: result.data.product,
+        itemIsClicked: true,
+        homePageIconIsClicked: false
+      })
+    });
+  }
+
   handleHomePageClick() {
     this.setState({
       homePageIconIsClicked: true,
@@ -78,7 +114,8 @@ class App extends React.Component {
     } else if(this.state.homePageIconIsClicked){
       page = <CategoryPage
                 categoryName={this.state.categoryName}
-                products={this.state.products}/>
+                products={this.state.products}
+                handleProductClick={this.handleProductClick}/>
     }
     return (
       <div className="App">

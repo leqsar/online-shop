@@ -7,7 +7,23 @@ class CategoryPage extends React.Component {
       isCardHovered : false
     }
     this.createCardElement = this.createCardElement.bind(this);
+    //this.handleMouseEnter = this.handleMouseEnter.bind(this);
+    //this.handleMouseLeave = this.handleMouseLeave.bind(this);
   }
+
+  /*handleMouseEnter(e) {
+    this.setState({
+      isCardHovered: true
+    });
+    console.log(e.currentTarget);
+  }
+
+  handleMouseLeave(e) {
+    this.setState({
+      isCardHovered: false
+    });
+    console.log(e.currentTarget);
+  }*/
 
   createCardElement(product) {
     let warningAboutUnstockedItem, unstokedItemStyle;
@@ -20,6 +36,8 @@ class CategoryPage extends React.Component {
         key={product.id}
         id={product.id}
         className="product-card"
+        //onMouseEnter={this.handleMouseEnter}
+        //onMouseLeave={this.handleMouseLeave}
         onClick={this.props.handleProductClick}
       >
         {warningAboutUnstockedItem}

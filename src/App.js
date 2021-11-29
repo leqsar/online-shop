@@ -1,6 +1,8 @@
 import './App.css';
 import Header from './components/Header.js'
 import CategoryPage from './components/CategoryPage.js'
+import ProductPage from './components/ProductPage.js'
+import CartOverlay from './components/CartOverlay.js'
 import React from 'react';
 import {gql} from "@apollo/client";
 
@@ -14,12 +16,7 @@ class App extends React.Component {
       itemIsClicked: false,
       homePageIconIsClicked: true,
       headerCartIconIsClicked: false,
-      choosenProduct: '',
-      cart: {
-        products: [],
-        total: 0,
-        amountOfItems: 0
-      }
+      choosenProduct: ''
     }
     this.handleHomePageClick = this.handleHomePageClick.bind(this);
     this.handleHeaderCartClick = this.handleHeaderCartClick.bind(this);
@@ -74,14 +71,21 @@ class App extends React.Component {
   }
 
   render() {
+    let page;
+    if(this.state.itemIsClicked){
+      page = <ProductPage
+                product={this.state.choosenProduct}/>
+    } else if(this.state.homePageIconIsClicked){
+      page = <CategoryPage
+                categoryName={this.state.categoryName}
+                products={this.state.products}/>
+    }
     return (
       <div className="App">
         <Header
           handleHomePageClick={this.handleHomePageClick}
           handleHeaderCartClick={this.handleHeaderCartClick}/>
-        <CategoryPage
-          categoryName={this.state.categoryName}
-          products={this.state.products}/>
+        {page}
       </div>
     );
   }

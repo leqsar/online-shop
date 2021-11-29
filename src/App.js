@@ -1,25 +1,44 @@
-import logo from './logo.svg';
 import './App.css';
+import Header from './components/Header.js'
+import React from 'react';
+import {gql} from "@apollo/client";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+
+class App extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      categoryName:'',
+      products: [],
+      homePageIconIsClicked: true,
+      headerCartIconIsClicked: false,
+    }
+    this.handleHomePageClick = this.handleHomePageClick.bind(this);
+    this.handleHeaderCartClick = this.handleHeaderCartClick.bind(this);
+  }
+
+  handleHomePageClick() {
+    this.setState({
+      homePageIconIsClicked: true,
+      itemIsClicked: false
+    });
+  }
+
+  handleHeaderCartClick() {
+    this.setState({
+      headerCartIconIsClicked: true
+    })
+  }
+
+  render() {
+    return (
+      <div className="App">
+        <Header
+          handleHomePageClick={this.handleHomePageClick}
+          handleHeaderCartClick={this.handleHeaderCartClick}/>
+      </div>
+    );
+  }
 }
 
 export default App;

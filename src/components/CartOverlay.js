@@ -2,24 +2,25 @@ import React from 'react'
 
 class CartOverlay extends React.Component {
   render() {
-    const productsList = this.props.cart.products.map(function (product, index) {
+    const productsList = this.props.cart.products.map(function (item, index) {
       let attributes;
+      console.log(item.amount);
       return (
         <li key={index} className="cart-overlay__product-wrapper">
           <div className="cart-overlay__product-info">
-            <p>{product.brand}</p>
-            <span className="cart-overlay__product-name">{product.name}</span>
-            <span>{product.prices[0].currency}{product.prices[0].amount}</span>
+            <p>{item.product.brand}</p>
+            <span className="cart-overlay__product-name">{item.product.name}</span>
+            <span>{item.product.prices[0].currency}{item.product.prices[0].amount}</span>
             <ul>
               /*{attributes}*/
             </ul>
           </div>
           <div className="cart-overlay__product-amount-info">
             <button>+</button>
-            <span>X</span>
+            <span>{item.amount}</span>
             <button>-</button>
           </div>
-          <img className="cart-overlay__product-image" src={product.gallery[0]} alt="product-image"></img>
+          <img className="cart-overlay__product-image" src={item.product.gallery[0]} alt="product-image"></img>
         </li>
       )
     })

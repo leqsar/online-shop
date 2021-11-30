@@ -92,19 +92,43 @@ class App extends React.Component {
     })
     .then((result) => {
       this.setState({
-        choosenProduct: result.data.product,
-        itemIsClicked: true,
-        homePageIconIsClicked: false
+          choosenProduct: result.data.product,
+          itemIsClicked: true,
+          homePageIconIsClicked: false
       })
     });
   }
 
+  /* product[
+      {
+      amount: 0,
+      product: {}
+    },
+    ...
+    ]*/
+
   handleAddToCartClick() {
+    let productIsInTheList;
+    const products = this.state.cart.products.concat();
+    products.forEach((product) => {
+      if(product.product.name === this.state.choosenProduct.name) {
+        productIsInTheList = true;
+        product.amount = product.amount + 1;
+      } else {
+        productIsInTheList = false;
+      }
+    })
+    if(!productIsInTheList) {
+      products.push(
+        {
+          product: this.state.choosenProduct,
+          amount: 1
+        }
+      )
+    }
     this.setState((state) => {
-      const products = state.cart.products.concat(this.state.choosenProduct);
       const newAmountOfItems = state.cart.amountOfItems + 1;
       const newTotal = state.cart.total + this.state.choosenProduct.prices[0].amount;
-
       return {
         cart: {
           products: products,
@@ -123,9 +147,8 @@ class App extends React.Component {
   }
 
   handleHeaderCartClick() {
-    console.log('here');
     this.setState({
-      headerCartIconIsClicked: true
+      headerCartIconIsClicked: !this.state.headerCartIconIsClicked
     })
   }
 
@@ -133,7 +156,7 @@ class App extends React.Component {
     let page;
     if(this.state.itemIsClicked){
       page = <ProductPage
-                product={this.state.choosenProduct}
+                choosenProduct={this.state.choosenProduct}
                 handleAddToCartClick={this.handleAddToCartClick}/>
     } else if(this.state.homePageIconIsClicked){
       page = <CategoryPage

@@ -86,7 +86,7 @@ class App extends React.Component {
     }
     this.setState((state) => {
       const newAmountOfItems = state.cart.amountOfItems + 1;
-      const newTotal = state.cart.total + this.state.choosenProduct.prices[0].amount;
+      const newTotal = Math.trunc((state.cart.total + this.state.choosenProduct.prices[0].amount)*100)/100;
       return {
         cart: {
           products: products,
@@ -119,11 +119,11 @@ class App extends React.Component {
     let newTotal, newAmountOfItems;
     if(event.target.textContent === "+") {
       products[indexOfProductForChange].amount++;
-      newTotal = this.state.cart.total + products[indexOfProductForChange].product.prices[0].amount;
+      newTotal = Math.trunc((this.state.cart.total + products[indexOfProductForChange].product.prices[0].amount)*100)/100;
       newAmountOfItems = this.state.cart.amountOfItems + 1;
     } else {
       products[indexOfProductForChange].amount--;
-      newTotal = this.state.cart.total - products[indexOfProductForChange].product.prices[0].amount;
+      newTotal = Math.trunc((this.state.cart.total - products[indexOfProductForChange].product.prices[0].amount)*100)/100;
       newAmountOfItems = this.state.cart.amountOfItems - 1;
     }
     if(products[indexOfProductForChange].amount === 0) {

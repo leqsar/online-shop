@@ -2,9 +2,9 @@ import React from 'react'
 
 class CartOverlay extends React.Component {
   render() {
+    const hadleChangeAmountButtonClick = this.props.hadleChangeAmountButtonClick;
     const productsList = this.props.cart.products.map(function (item, index) {
       let attributes;
-      console.log(item.amount);
       return (
         <li key={index} className="cart-overlay__product-wrapper">
           <div className="cart-overlay__product-info">
@@ -16,9 +16,9 @@ class CartOverlay extends React.Component {
             </ul>
           </div>
           <div className="cart-overlay__product-amount-info">
-            <button>+</button>
+            <button onClick={hadleChangeAmountButtonClick} data-product-name={item.product.name}>+</button>
             <span>{item.amount}</span>
-            <button>-</button>
+            <button onClick={hadleChangeAmountButtonClick} data-product-name={item.product.name}>-</button>
           </div>
           <img className="cart-overlay__product-image" src={item.product.gallery[0]} alt="product-image"></img>
         </li>

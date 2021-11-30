@@ -27,6 +27,7 @@ class App extends React.Component {
     this.handleAddToCartClick = this.handleAddToCartClick.bind(this);
     this.handleHomePageClick = this.handleHomePageClick.bind(this);
     this.handleHeaderCartClick = this.handleHeaderCartClick.bind(this);
+    this.hadleChangeAmountButtonClick = this.hadleChangeAmountButtonClick.bind(this);
   }
 
   componentDidMount() {
@@ -99,14 +100,6 @@ class App extends React.Component {
     });
   }
 
-  /* product[
-      {
-      amount: 0,
-      product: {}
-    },
-    ...
-    ]*/
-
   handleAddToCartClick() {
     let productIsInTheList;
     const products = this.state.cart.products.concat();
@@ -152,6 +145,32 @@ class App extends React.Component {
     })
   }
 
+  hadleChangeAmountButtonClick(event) {
+    let products = this.state.cart.products.concat();
+    let productForChange = products.filter(product =>
+      product.product.name === event.target.dataset.productName
+    );
+    const indexOfProductForChange = products.indexOf(productForChange[0]);
+    let newTotal;
+    if(event.target.textContent === "+") {
+      products[indexOfProductForChange].amount++;
+      newTotal = this.state.cart.total + products[indexOfProductForChange].product.prices[0].amount;
+    } else {
+      products[indexOfProductForChange].amount--;
+      newTotal = this.state.cart.total - products[indexOfProductForChange].product.prices[0].amount;
+    }
+    if(products[indexOfProductForChange].amount === 0) {
+      products.splice(indexOfProductForChange, 1)
+    }
+    this.setState({
+      cart: {
+        products: products,
+        total: newTotal,
+        amountOfItems: this.state.cart.amountOfItems
+      }
+    })
+  }
+
   render() {
     let page;
     if(this.state.itemIsClicked){
@@ -170,7 +189,9 @@ class App extends React.Component {
           handleHomePageClick={this.handleHomePageClick}
           handleHeaderCartClick={this.handleHeaderCartClick}/>
         {this.state.headerCartIconIsClicked && (
-            <CartOverlay cart={this.state.cart}/>
+            <CartOverlay
+              cart={this.state.cart}
+              hadleChangeAmountButtonClick={this.hadleChangeAmountButtonClick}/>
         )}
         {page}
       </div>

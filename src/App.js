@@ -16,9 +16,15 @@ class App extends React.Component {
       itemIsClicked: false,
       homePageIconIsClicked: true,
       headerCartIconIsClicked: false,
-      choosenProduct: ''
+      choosenProduct: '',
+      cart: {
+        products: [],
+        total: 0,
+        amountOfItems: 0
+      }
     }
     this.handleProductClick = this.handleProductClick.bind(this);
+    this.handleAddToCartClick = this.handleAddToCartClick.bind(this);
     this.handleHomePageClick = this.handleHomePageClick.bind(this);
     this.handleHeaderCartClick = this.handleHeaderCartClick.bind(this);
   }
@@ -93,6 +99,22 @@ class App extends React.Component {
     });
   }
 
+  handleAddToCartClick() {
+    this.setState((state) => {
+      const products = state.cart.products.concat(this.state.choosenProduct);
+      const newAmountOfItems = state.cart.amountOfItems + 1;
+      const newTotal = state.cart.total + this.state.choosenProduct.prices[0].amount;
+
+      return {
+        cart: {
+          products: products,
+          amountOfItems:  newAmountOfItems,
+          total: newTotal
+        }
+      }
+    });
+  }
+
   handleHomePageClick() {
     this.setState({
       homePageIconIsClicked: true,
@@ -101,6 +123,7 @@ class App extends React.Component {
   }
 
   handleHeaderCartClick() {
+    console.log('here');
     this.setState({
       headerCartIconIsClicked: true
     })
@@ -110,7 +133,8 @@ class App extends React.Component {
     let page;
     if(this.state.itemIsClicked){
       page = <ProductPage
-                product={this.state.choosenProduct}/>
+                product={this.state.choosenProduct}
+                handleAddToCartClick={this.handleAddToCartClick}/>
     } else if(this.state.homePageIconIsClicked){
       page = <CategoryPage
                 categoryName={this.state.categoryName}
@@ -122,6 +146,9 @@ class App extends React.Component {
         <Header
           handleHomePageClick={this.handleHomePageClick}
           handleHeaderCartClick={this.handleHeaderCartClick}/>
+        {this.state.headerCartIconIsClicked && (
+            <CartOverlay cart={this.state.cart}/>
+        )}
         {page}
       </div>
     );

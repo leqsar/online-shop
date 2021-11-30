@@ -2,7 +2,7 @@ import React from 'react';
 
 class ProductPage extends React.Component {
   render () {
-    let isSwatch;
+    let isSwatch, button;
     const product = this.props.choosenProduct;
     const listOfAttributes = product.attributes.map(function(attribute, index) {
       isSwatch = attribute.type === "swatch" ? true : false;
@@ -27,6 +27,14 @@ class ProductPage extends React.Component {
       <img className="miniature" src={link} alt="" key={index}></img>
     )
 
+    if(product.inStock) {
+      button = <button
+        className="product-page__add-to-card-button"
+        onClick={this.props.handleAddToCartClick}>add to cart</button>
+    } else {
+      button = <button className="product-page__not-in-stock-button">not in stock</button>
+    }
+
     return (
       <div className="product-page">
         <div className="product-page__gallery">
@@ -41,9 +49,7 @@ class ProductPage extends React.Component {
           {listOfAttributes}
           <p className="product-page__price-heading">Price</p>
           <span className="product-page__price">{product.prices[0].currency}{product.prices[0].amount}</span>
-          <button
-            className="product-page__add-to-card-button"
-            onClick={this.props.handleAddToCartClick}>add to cart</button>
+          {button}
           <div className="description" dangerouslySetInnerHTML={{__html: product.description}}>
           </div>
         </div>

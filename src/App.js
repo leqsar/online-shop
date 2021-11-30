@@ -4,6 +4,7 @@ import CategoryPage from './components/CategoryPage.js'
 import ProductPage from './components/ProductPage.js'
 import CartOverlay from './components/CartOverlay.js'
 import BagPage from './components/BagPage.js'
+import {CATEGORYQUERY, PRODUCTQUERY} from './constants.js'
 import React from 'react';
 import {gql} from "@apollo/client";
 
@@ -37,29 +38,7 @@ class App extends React.Component {
   componentDidMount() {
     this.props.client
     .query({
-      query: gql`
-        query {
-          categories {
-            name
-            products {
-              id,
-              name,
-              inStock,
-              gallery,
-              prices {
-                currency,
-                amount
-              },
-              description,
-              attributes {
-                name,
-                items {
-                  value
-                }
-              }
-            }
-          }
-        }`
+      query: gql`${CATEGORYQUERY}`
     })
     .then((result) => {
       this.setState({
@@ -74,25 +53,7 @@ class App extends React.Component {
     .query({
       query: gql`
         query {
-          product(id: "${e.currentTarget.id}"){
-            name,
-            brand,
-            prices {
-              currency,
-              amount
-            },
-            description
-            inStock,
-            gallery,
-            category,
-            attributes {
-              name,
-              type,
-              items {
-                value
-              }
-            }
-          }
+          product(id: "${e.currentTarget.id}")${PRODUCTQUERY}
         }`
     })
     .then((result) => {

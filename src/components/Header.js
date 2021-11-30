@@ -24,7 +24,7 @@ class Header extends React.Component {
           <img
             className="cart-icon"
             src="/images/cart.svg"
-            onClick={this.props.handleHeaderCartClick} 
+            onClick={this.props.handleHeaderCartClick}
             alt="cart-icon"></img>
         </header>
       </React.Fragment>

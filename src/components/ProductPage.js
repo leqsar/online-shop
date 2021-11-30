@@ -36,7 +36,7 @@ class ProductPage extends React.Component {
     }
 
     return (
-      <div className="product-page">
+      <div className="product-page" onClick={this.props.onClick}>
         <div className="product-page__gallery">
           <div className="product-page__miniature-gallery">
             {gallery}

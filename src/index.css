@@ -431,3 +431,45 @@ button:hover {
   background: #5ECE7B;
   color: #FFFFFF;
 }
+
+.bag-page__product-wrapper {
+  display: flex;
+}
+
+.bag-page__product-amount-info {
+  display: flex;
+  flex-direction: column;
+  width: 45px;
+  height: 185px;
+  margin-left: 607px;
+  justify-content: space-between;
+}
+
+.bag-page__product-amount-info button {
+  width: 45px;
+  height: 45px;
+  background-color: white;
+  border: 1px solid #1D1F22;
+  padding: 0;
+  box-sizing: border-box;
+  font-weight: 500;
+  font-size: 20px;
+}
+
+.bag-page__product-amount-info span {
+  height: 45px;
+  font-weight: 500;
+  font-size: 20px;
+}
+
+.bag-page__product-image {
+  width: 141px;
+  height: 185px;
+  margin-left: 12px;
+  object-fit: contain;
+  background-color: white;
+}
+
+.bag-page-wrapper li:not(:first-child) {
+  margin-top: 41px;
+}

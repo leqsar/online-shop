@@ -1,26 +1,21 @@
-import React from 'react'
+import React from 'react';
+import ProductInfoContainer from "./ProductInfoContainer.js"
+import ProductAmountSettingContainer from "./ProductAmountSettingContainer.js"
 
 class CartOverlay extends React.Component {
   render() {
-    const hadleChangeAmountButtonClick = this.props.hadleChangeAmountButtonClick;
+    const props = this.props;
     const productsList = this.props.cart.products.map(function (item, index) {
       let attributes;
       return (
         <li key={index} className="cart-overlay__product-wrapper">
-          <div className="cart-overlay__product-info">
-            <p>{item.product.brand}</p>
-            <span className="cart-overlay__product-name">{item.product.name}</span>
-            <span>{item.product.prices[0].currency}{item.product.prices[0].amount}</span>
-            <ul>
-              /*{attributes}*/
-            </ul>
-          </div>
-          <div className="cart-overlay__product-amount-info">
-            <button onClick={hadleChangeAmountButtonClick} data-product-name={item.product.name}>+</button>
-            <span>{item.amount}</span>
-            <button onClick={hadleChangeAmountButtonClick} data-product-name={item.product.name}>-</button>
-          </div>
-          <img className="cart-overlay__product-image" src={item.product.gallery[0]} alt="product-image"></img>
+          <ProductInfoContainer
+            productInfo={item}
+            classPrefix={'cart-overlay'}/>
+          <ProductAmountSettingContainer
+            productInfo={item}
+            hadleChangeAmountButtonClick={props.hadleChangeAmountButtonClick}
+            classPrefix={'cart-overlay'}/>
         </li>
       )
     })
@@ -38,7 +33,9 @@ class CartOverlay extends React.Component {
           </p>
         </div>
         <div className="cart-overlay__buttons-wrapper">
-          <button className="cart-overlay__viewBag-button">view bag</button>
+          <button
+            className="cart-overlay__viewBag-button"
+            onClick={this.props.handleViewBagButton}>view bag</button>
           <button className="cart-overlay__checkOut-button">check out</button>
         </div>
       </div>

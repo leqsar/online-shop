@@ -57,7 +57,7 @@ class CategoryPage extends React.Component {
     const productsArray = this.props.products;
     const listProducts = productsArray.map((product) => this.createCardElement(product));
     return (
-      <div className="category-page">
+      <div className="category-page" onClick={this.props.onClick}>
         <h1>{this.props.categoryName}</h1>
         <div className="products-wrapper">
           {listProducts}

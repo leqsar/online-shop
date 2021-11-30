@@ -3,6 +3,7 @@ import Header from './components/Header.js'
 import CategoryPage from './components/CategoryPage.js'
 import ProductPage from './components/ProductPage.js'
 import CartOverlay from './components/CartOverlay.js'
+import BagPage from './components/BagPage.js'
 import React from 'react';
 import {gql} from "@apollo/client";
 
@@ -21,13 +22,16 @@ class App extends React.Component {
         products: [],
         total: 0,
         amountOfItems: 0
-      }
+      },
+      openBag: false
     }
     this.handleProductClick = this.handleProductClick.bind(this);
     this.handleAddToCartClick = this.handleAddToCartClick.bind(this);
     this.handleHomePageClick = this.handleHomePageClick.bind(this);
     this.handleHeaderCartClick = this.handleHeaderCartClick.bind(this);
     this.hadleChangeAmountButtonClick = this.hadleChangeAmountButtonClick.bind(this);
+    this.handleRandomClick = this.handleRandomClick.bind(this);
+    this.handleViewBagButton = this.handleViewBagButton.bind(this);
   }
 
   componentDidMount() {
@@ -127,7 +131,7 @@ class App extends React.Component {
           products: products,
           amountOfItems:  newAmountOfItems,
           total: newTotal
-        }
+        },
       }
     });
   }
@@ -135,7 +139,7 @@ class App extends React.Component {
   handleHomePageClick() {
     this.setState({
       homePageIconIsClicked: true,
-      itemIsClicked: false
+      itemIsClicked: false,
     });
   }
 
@@ -151,13 +155,15 @@ class App extends React.Component {
       product.product.name === event.target.dataset.productName
     );
     const indexOfProductForChange = products.indexOf(productForChange[0]);
-    let newTotal;
+    let newTotal, newAmountOfItems;
     if(event.target.textContent === "+") {
       products[indexOfProductForChange].amount++;
       newTotal = this.state.cart.total + products[indexOfProductForChange].product.prices[0].amount;
+      newAmountOfItems = this.state.cart.amountOfItems + 1;
     } else {
       products[indexOfProductForChange].amount--;
       newTotal = this.state.cart.total - products[indexOfProductForChange].product.prices[0].amount;
+      newAmountOfItems = this.state.cart.amountOfItems - 1;
     }
     if(products[indexOfProductForChange].amount === 0) {
       products.splice(indexOfProductForChange, 1)
@@ -166,8 +172,23 @@ class App extends React.Component {
       cart: {
         products: products,
         total: newTotal,
-        amountOfItems: this.state.cart.amountOfItems
+        amountOfItems: newAmountOfItems
       }
+    })
+  }
+
+  handleRandomClick(event){
+    this.setState({
+      headerCartIconIsClicked: false
+    })
+  }
+
+  handleViewBagButton(){
+    console.log('here');
+    this.setState({
+      openBag: true,
+      homePageIconIsClicked: false,
+      itemIsClicked: false
     })
   }
 
@@ -176,22 +197,31 @@ class App extends React.Component {
     if(this.state.itemIsClicked){
       page = <ProductPage
                 choosenProduct={this.state.choosenProduct}
-                handleAddToCartClick={this.handleAddToCartClick}/>
+                handleAddToCartClick={this.handleAddToCartClick}
+                onClick={this.handleRandomClick}/>
     } else if(this.state.homePageIconIsClicked){
       page = <CategoryPage
                 categoryName={this.state.categoryName}
                 products={this.state.products}
-                handleProductClick={this.handleProductClick}/>
+                handleProductClick={this.handleProductClick}
+                onClick={this.handleRandomClick}/>
+    } else if(this.state.openBag) {
+      page = <BagPage
+                cart={this.state.cart}
+                hadleChangeAmountButtonClick={this.hadleChangeAmountButtonClick}
+                handleViewBagButton={this.handleViewBagButton}/>
     }
     return (
       <div className="App">
         <Header
           handleHomePageClick={this.handleHomePageClick}
-          handleHeaderCartClick={this.handleHeaderCartClick}/>
+          handleHeaderCartClick={this.handleHeaderCartClick}
+          onClick={this.handleRandomClick}/>
         {this.state.headerCartIconIsClicked && (
             <CartOverlay
               cart={this.state.cart}
-              hadleChangeAmountButtonClick={this.hadleChangeAmountButtonClick}/>
+              hadleChangeAmountButtonClick={this.hadleChangeAmountButtonClick}
+              handleViewBagButton={this.handleViewBagButton}/>
         )}
         {page}
       </div>

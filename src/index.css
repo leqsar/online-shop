@@ -436,6 +436,15 @@ button:hover {
   display: flex;
 }
 
+.bag-page-wrapper {
+  width: 1097px;
+  margin-left: 100px;
+}
+
+.bag-page-wrapper h1 {
+  text-align: left;
+}
+
 .bag-page__product-amount-info {
   display: flex;
   flex-direction: column;
@@ -472,4 +481,42 @@ button:hover {
 
 .bag-page-wrapper li:not(:first-child) {
   margin-top: 41px;
+}
+
+.bag-page-wrapper li:first-child {
+  margin-top: 80px;
+}
+
+.bag-page__product-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.bag-page__product-info p,
+.bag-page__product-name,
+.bag-page__product-info span:nth-child(3) {
+  width: 292px;
+  text-align: left;
+}
+
+.bag-page__product-info p {
+  font-weight: 600;
+  font-size: 30px;
+  line-height: 27px;
+}
+
+.bag-page__product-name {
+  margin-top: 16px;
+  font-weight: normal;
+  font-size: 30px;
+  line-height: 27px
+}
+
+.bag-page__product-info span:nth-child(3) {
+  padding-top: 7.5px;
+  margin-top: 12px;
+  height: 46px;
+  font-weight: bold;
+  font-size: 24px;
+  line-height: 18px;
 }

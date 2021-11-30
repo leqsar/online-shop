@@ -29,8 +29,8 @@ class ProductPage extends React.Component {
 
     if(product.inStock) {
       button = <button
-        className="product-page__add-to-card-button"
-        onClick={this.props.handleAddToCartClick}>add to cart</button>
+                  className="product-page__add-to-card-button"
+                  onClick={this.props.handleAddToCartClick}>add to cart</button>
     } else {
       button = <button className="product-page__not-in-stock-button">not in stock</button>
     }

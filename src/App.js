@@ -177,7 +177,9 @@ class App extends React.Component {
         <Header
           handleHomePageClick={this.handleHomePageClick}
           handleHeaderCartClick={this.handleHeaderCartClick}
-          onClick={this.handleRandomClick}/>
+          onClick={this.handleRandomClick}
+          cart={this.state.cart}
+          headerCartIconIsClicked={this.state.headerCartIconIsClicked}/>
         {this.state.headerCartIconIsClicked && (
             <CartOverlay
               cart={this.state.cart}

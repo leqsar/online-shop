@@ -26,6 +26,9 @@ class Header extends React.Component {
             src="/images/cart.svg"
             onClick={this.props.handleHeaderCartClick}
             alt="cart-icon"></img>
+          {this.props.headerCartIconIsClicked && (
+            <p className="header__totalOfItemsIcon">{this.props.cart.amountOfItems}</p>)
+          }
         </header>
       </React.Fragment>
     )

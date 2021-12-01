@@ -174,18 +174,21 @@ class App extends React.Component {
       page = <ProductPage
                 choosenProduct={this.state.choosenProduct}
                 handleAddToCartClick={this.handleAddToCartClick}
-                onClick={this.handleRandomClick}/>
+                onClick={this.handleRandomClick}
+                choosenCurrency={this.state.choosenCurrency}/>
     } else if(this.state.homePageIconIsClicked){
       page = <CategoryPage
                 categoryName={this.state.categoryName}
                 products={this.state.products}
                 handleProductClick={this.handleProductClick}
-                onClick={this.handleRandomClick}/>
+                onClick={this.handleRandomClick}
+                choosenCurrency={this.state.choosenCurrency}/>
     } else if(this.state.openBag) {
       page = <BagPage
                 cart={this.state.cart}
                 hadleChangeAmountButtonClick={this.hadleChangeAmountButtonClick}
-                handleViewBagButton={this.handleViewBagButton}/>
+                handleViewBagButton={this.handleViewBagButton}
+                choosenCurrency={this.state.choosenCurrency}/>
     }
     return (
       <div className="App">
@@ -201,7 +204,8 @@ class App extends React.Component {
             <CartOverlay
               cart={this.state.cart}
               hadleChangeAmountButtonClick={this.hadleChangeAmountButtonClick}
-              handleViewBagButton={this.handleViewBagButton}/>
+              handleViewBagButton={this.handleViewBagButton}
+              choosenCurrency={this.state.choosenCurrency}/>
         )}
         {this.state.currencyOverlayIsOpen && (
             <CurrencyOverlay

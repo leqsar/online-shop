@@ -1,15 +1,21 @@
 import React from 'react';
 import Attributes from './Attributes.js'
+import findAppropriateSymbol from '../findAppropriateSymbol.js'
+const HtmlToReactParser = require('html-to-react').Parser;
+const ReactDOMServer = require('react-dom/server');
 
 
 class ProductPage extends React.Component {
   render () {
     let button;
+    const choosenCurrency = this.props.choosenCurrency;
     const product = this.props.choosenProduct;
+    const htmlToReactParser = new HtmlToReactParser();
+    const descriptionElement = htmlToReactParser.parse(product.description);
     const gallery = product.gallery.map((link, index) =>
       <img className="miniature" src={link} alt="" key={index}></img>
     )
-
+    const currentCurrency = product.prices.filter(price => price.currency===`${choosenCurrency}`)[0];
     if(product.inStock) {
       button = <button
                   className="product-page__add-to-card-button"
@@ -33,9 +39,10 @@ class ProductPage extends React.Component {
             choosenProduct={product}
             classPrefix="product-page"/>
           <p className="product-page__price-heading">Price</p>
-          <span className="product-page__price">{product.prices[0].currency}{product.prices[0].amount}</span>
+          <span className="product-page__price">{findAppropriateSymbol(choosenCurrency)}{currentCurrency.amount}</span>
           {button}
-          <div className="description" dangerouslySetInnerHTML={{__html: product.description}}>
+          <div className="description">
+            {descriptionElement}
           </div>
         </div>
       </div>

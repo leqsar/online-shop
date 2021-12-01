@@ -1,4 +1,5 @@
 import React from 'react';
+import findAppropriateSymbol from '../findAppropriateSymbol.js'
 
 class CategoryPage extends React.Component {
   constructor(props) {
@@ -7,43 +8,27 @@ class CategoryPage extends React.Component {
       isCardHovered : false
     }
     this.createCardElement = this.createCardElement.bind(this);
-    //this.handleMouseEnter = this.handleMouseEnter.bind(this);
-    //this.handleMouseLeave = this.handleMouseLeave.bind(this);
   }
-
-  /*handleMouseEnter(e) {
-    this.setState({
-      isCardHovered: true
-    });
-    console.log(e.currentTarget);
-  }
-
-  handleMouseLeave(e) {
-    this.setState({
-      isCardHovered: false
-    });
-    console.log(e.currentTarget);
-  }*/
 
   createCardElement(product) {
     let warningAboutUnstockedItem, unstokedItemStyle;
+    const choosenCurrency = this.props.choosenCurrency;
     if (!product.inStock) {
       warningAboutUnstockedItem = <span className="unstoked-warning">out of stock</span>;
       unstokedItemStyle = {opacity: "0.5"};
     }
+    const currentCurrency = product.prices.filter(price => price.currency===`${choosenCurrency}`)[0];
     return (
       <div
         key={product.id}
         id={product.id}
         className="product-card"
-        //onMouseEnter={this.handleMouseEnter}
-        //onMouseLeave={this.handleMouseLeave}
         onClick={this.props.handleProductClick}
       >
         {warningAboutUnstockedItem}
         <img className="product-image" src={product.gallery[0]} style={unstokedItemStyle} alt=""></img>
         <span className="product-name" style={unstokedItemStyle}>{product.name}</span>
-        <span className="product-price" style={unstokedItemStyle}>{product.prices[0].amount}{product.prices[0].currency}</span>
+        <span className="product-price" style={unstokedItemStyle}>{currentCurrency.amount}{findAppropriateSymbol(choosenCurrency)}</span>
         {this.state.isCardHovered && (
           <div className="category-page__add-to-card-button">
             <img src="/images/white-cart.svg" alt="cart-icon"></img>

@@ -1,6 +1,7 @@
 import React from 'react';
 import ProductInfoContainer from "./ProductInfoContainer.js"
 import ProductAmountSettingContainer from "./ProductAmountSettingContainer.js"
+import findAppropriateSymbol from '../findAppropriateSymbol.js'
 
 class CartOverlay extends React.Component {
   render() {
@@ -11,7 +12,8 @@ class CartOverlay extends React.Component {
         <li key={index} className="cart-overlay__product-wrapper">
           <ProductInfoContainer
             productInfo={item}
-            classPrefix={'cart-overlay'}/>
+            classPrefix={'cart-overlay'}
+            choosenCurrency={props.choosenCurrency}/>
           <ProductAmountSettingContainer
             productInfo={item}
             hadleChangeAmountButtonClick={props.hadleChangeAmountButtonClick}

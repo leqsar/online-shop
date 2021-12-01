@@ -4,10 +4,10 @@ import CategoryPage from './components/CategoryPage.js'
 import ProductPage from './components/ProductPage.js'
 import CartOverlay from './components/CartOverlay.js'
 import BagPage from './components/BagPage.js'
+import CurrencyOverlay from './components/CurrencyOverlay.js'
 import {CATEGORYQUERY, PRODUCTQUERY} from './constants.js'
 import React from 'react';
 import {gql} from "@apollo/client";
-
 
 class App extends React.Component {
   constructor(props) {
@@ -24,7 +24,9 @@ class App extends React.Component {
         total: 0,
         amountOfItems: 0
       },
-      openBag: false
+      openBag: false,
+      choosenCurrency: 'USD',
+      currencyOverlayIsOpen: false
     }
     this.handleProductClick = this.handleProductClick.bind(this);
     this.handleAddToCartClick = this.handleAddToCartClick.bind(this);
@@ -33,6 +35,8 @@ class App extends React.Component {
     this.hadleChangeAmountButtonClick = this.hadleChangeAmountButtonClick.bind(this);
     this.handleRandomClick = this.handleRandomClick.bind(this);
     this.handleViewBagButton = this.handleViewBagButton.bind(this);
+    this.handleCurrencyClick = this.handleCurrencyClick.bind(this);
+    this.handleCurrencyChangeClick = this.handleCurrencyChangeClick.bind(this);
   }
 
   componentDidMount() {
@@ -104,6 +108,18 @@ class App extends React.Component {
     });
   }
 
+  handleCurrencyClick() {
+    this.setState({
+      currencyOverlayIsOpen: !this.state.currencyOverlayIsOpen
+    })
+  }
+
+  handleCurrencyChangeClick(event){
+    this.setState({
+      choosenCurrency: `${event.currentTarget.dataset.currency}`
+    })
+  }
+
   handleHeaderCartClick() {
     this.setState({
       headerCartIconIsClicked: !this.state.headerCartIconIsClicked
@@ -145,7 +161,6 @@ class App extends React.Component {
   }
 
   handleViewBagButton(){
-    console.log('here');
     this.setState({
       openBag: true,
       homePageIconIsClicked: false,
@@ -175,16 +190,22 @@ class App extends React.Component {
     return (
       <div className="App">
         <Header
+          onClick={this.handleRandomClick}
           handleHomePageClick={this.handleHomePageClick}
           handleHeaderCartClick={this.handleHeaderCartClick}
-          onClick={this.handleRandomClick}
+          handleCurrencyClick={this.handleCurrencyClick}
           cart={this.state.cart}
-          headerCartIconIsClicked={this.state.headerCartIconIsClicked}/>
+          headerCartIconIsClicked={this.state.headerCartIconIsClicked}
+          choosenCurrency={this.state.choosenCurrency}/>
         {this.state.headerCartIconIsClicked && (
             <CartOverlay
               cart={this.state.cart}
               hadleChangeAmountButtonClick={this.hadleChangeAmountButtonClick}
               handleViewBagButton={this.handleViewBagButton}/>
+        )}
+        {this.state.currencyOverlayIsOpen && (
+            <CurrencyOverlay
+              handleCurrencyChangeClick={this.handleCurrencyChangeClick}/>
         )}
         {page}
       </div>

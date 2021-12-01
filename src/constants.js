@@ -41,4 +41,27 @@ const PRODUCTQUERY = `{
   }
 `
 
-export {CATEGORYQUERY, PRODUCTQUERY}
+const CORRESPONDINGCURRENCYSYMBOLS = [
+  {
+    name: 'USD',
+    symbol: '$'
+  },
+  {
+    name: 'GBP',
+    symbol: '£'
+  },
+  {
+    name: 'AUD',
+    symbol: '$'
+  },
+  {
+    name: 'JPY',
+    symbol: '¥'
+  },
+  {
+    name: 'RUB',
+    symbol: '₽'
+  },
+]
+
+export {CATEGORYQUERY, PRODUCTQUERY, CORRESPONDINGCURRENCYSYMBOLS}

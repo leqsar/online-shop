@@ -113,10 +113,19 @@ button:hover {
   width: 1223px;
 }
 
+.category-page h1 {
+  text-align: left;
+  font-weight: normal;
+  font-size: 42px;
+  line-height: 160%;
+  margin-top: 80px;
+}
+
 .products-wrapper {
   display: grid;
   grid-template-columns: repeat(3, 356px);
   grid-column-gap: 40px;
+  justify-content: center;
 }
 
 .product-card {
@@ -596,4 +605,35 @@ button:hover {
   font-size: 16px;
   line-height: 18px;
   font-weight: normal;
+}
+
+.currency-overlay {
+  position: absolute;
+  top: 60px;
+  left: 1255px;
+  display: flex;
+  flex-direction: column;
+  width: 114px;
+  height: 175px;
+  background-color: #FFFFFF;
+  justify-content: space-around;
+}
+
+.currency-overlay__currency-container {
+  top: 40px;
+  width: 54px;
+  height: 29px;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 160%;
+}
+
+.currency-overlay__currency-container span:first-child {
+  width: 10px;
+  margin-left: 20px;
+}
+
+.currency-overlay__currency-container span:last-child {
+  width: 20px;
+  margin-left: 5px;
 }

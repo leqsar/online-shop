@@ -1,7 +1,9 @@
 import React from 'react';
+import findAppropriateSymbol from '../findAppropriateSymbol.js'
 
 class Header extends React.Component {
   render() {
+    const currency = findAppropriateSymbol(this.props.choosenCurrency);
     return(
       <React.Fragment>
         <header>
@@ -17,8 +19,8 @@ class Header extends React.Component {
             src="/images/store-icon.svg"
             onClick={this.props.handleHomePageClick}
             alt=""></img>
-          <div className="currency-container">
-            <span>$</span>
+          <div className="currency-container" onClick={this.props.handleCurrencyClick}>
+            <span>{currency}</span>
             <img src="/images/arrow.svg" alt="currency-icon"></img>
           </div>
           <img

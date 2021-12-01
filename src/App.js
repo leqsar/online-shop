@@ -207,6 +207,9 @@ class App extends React.Component {
               handleViewBagButton={this.handleViewBagButton}
               choosenCurrency={this.state.choosenCurrency}/>
         )}
+        {this.state.headerCartIconIsClicked && (
+            <div className="opacity-overlay"></div>
+        )}
         {this.state.currencyOverlayIsOpen && (
             <CurrencyOverlay
               handleCurrencyChangeClick={this.handleCurrencyChangeClick}/>

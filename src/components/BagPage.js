@@ -1,6 +1,7 @@
 import React from 'react'
-import ProductInfoContainer from "./ProductInfoContainer.js"
-import ProductAmountSettingContainer from "./ProductAmountSettingContainer.js"
+import ProductInfoContainer from './ProductInfoContainer.js'
+import ProductAmountSettingContainer from './ProductAmountSettingContainer.js'
+
 
 class BagPage extends React.Component {
   render() {

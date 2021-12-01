@@ -1,28 +1,11 @@
 import React from 'react';
+import Attributes from './Attributes.js'
+
 
 class ProductPage extends React.Component {
   render () {
-    let isSwatch, button;
+    let button;
     const product = this.props.choosenProduct;
-    const listOfAttributes = product.attributes.map(function(attribute, index) {
-      isSwatch = attribute.type === "swatch" ? true : false;
-      const listOfAttributeItems = attribute.items.map(function(item, index) {
-        if(isSwatch) {
-          return <li key={index} style={{background: `${item.value}`}}></li>
-        } else {
-          return <li key={index}>{item.value}</li>
-        }
-      })
-      return (
-        <React.Fragment key={index}>
-          <p className="product-page__attribute-name">{attribute.name}</p>
-          <ul className="attribute-items">
-            {listOfAttributeItems}
-          </ul>
-        </React.Fragment>
-      )
-    })
-
     const gallery = product.gallery.map((link, index) =>
       <img className="miniature" src={link} alt="" key={index}></img>
     )
@@ -46,7 +29,9 @@ class ProductPage extends React.Component {
         <div className="product-page__information">
           <h1>{product.brand}</h1>
           <p className="product-page__name">{product.name}</p>
-          {listOfAttributes}
+          <Attributes
+            choosenProduct={product}
+            classPrefix="product-page"/>
           <p className="product-page__price-heading">Price</p>
           <span className="product-page__price">{product.prices[0].currency}{product.prices[0].amount}</span>
           {button}

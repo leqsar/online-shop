@@ -106,11 +106,6 @@ button:hover {
   transition: transform 0.2s ease;
 }
 
-/* .currency-container img:hover {
-  transform: rotate (180deg);
-  transition: transform 1s ease;
-} */
-
 .cart-icon {
   width: 20px;
   height: 18px;

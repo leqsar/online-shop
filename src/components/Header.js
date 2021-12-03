@@ -4,7 +4,6 @@ import findAppropriateSymbol from '../findAppropriateSymbol.js'
 class Header extends React.Component {
   render() {
     const currency = findAppropriateSymbol(this.props.choosenCurrency);
-    console.log(this.props.styleOfArrow);
     return(
       <React.Fragment>
         <header>

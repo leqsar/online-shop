@@ -54,20 +54,38 @@ class App extends React.Component {
   }
 
   handleProductClick(e) {
-    this.props.client
-    .query({
-      query: gql`
-        query {
-          product(id: "${e.currentTarget.id}")${PRODUCTQUERY}
-        }`
-    })
-    .then((result) => {
-      this.setState({
-          choosenProduct: result.data.product,
-          itemIsClicked: true,
-          homePageIconIsClicked: false
+    const isCartIconWasClicked = e.target.classList.contains('category-page__add-to-card-icon');
+    const isCartButtonWasClicked = e.target.classList.contains('category-page__add-to-card-button');
+    if(!(isCartIconWasClicked || isCartButtonWasClicked)) {
+      this.props.client
+      .query({
+        query: gql`
+          query {
+            product(id: "${e.currentTarget.id}")${PRODUCTQUERY}
+          }`
       })
-    });
+      .then((result) => {
+        this.setState({
+            choosenProduct: result.data.product,
+            itemIsClicked: true,
+            homePageIconIsClicked: false
+        })
+      });
+    } else {
+      this.props.client
+      .query({
+        query: gql`
+          query {
+            product(id: "${e.currentTarget.id}")${PRODUCTQUERY}
+          }`
+      })
+      .then((result) => {
+        this.setState({
+            choosenProduct: result.data.product
+        });
+        this.handleAddToCartClick()
+      });
+    }
   }
 
   handleAddToCartClick() {

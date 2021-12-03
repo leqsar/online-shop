@@ -4,6 +4,7 @@ import findAppropriateSymbol from '../findAppropriateSymbol.js'
 class Header extends React.Component {
   render() {
     const currency = findAppropriateSymbol(this.props.choosenCurrency);
+    console.log(this.props.styleOfArrow);
     return(
       <React.Fragment>
         <header>
@@ -21,7 +22,7 @@ class Header extends React.Component {
             alt=""></img>
           <div className="currency-container" onClick={this.props.handleCurrencyClick}>
             <span>{currency}</span>
-            <img src="/images/arrow.svg" alt="currency-icon"></img>
+            <img src="/images/arrow.svg" alt="currency-icon" style={this.props.styleOfArrow}></img>
           </div>
           <img
             className="cart-icon"
@@ -36,5 +37,4 @@ class Header extends React.Component {
     )
   }
 }
-
 export default Header;

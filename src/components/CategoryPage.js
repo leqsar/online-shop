@@ -17,7 +17,9 @@ class CategoryPage extends React.Component {
       warningAboutUnstockedItem = <span className="unstoked-warning">out of stock</span>;
       unstokedItemStyle = {opacity: "0.5"};
     }
-    const currentCurrency = product.prices.filter(price => price.currency===`${choosenCurrency}`)[0];
+    const currentCurrency = product.prices.filter(price =>
+      price.currency===`${choosenCurrency}`
+    )[0];
     return (
       <div
         key={product.id}
@@ -26,7 +28,11 @@ class CategoryPage extends React.Component {
         onClick={this.props.handleProductClick}
       >
         {warningAboutUnstockedItem}
-        <img className="product-image" src={product.gallery[0]} style={unstokedItemStyle} alt=""></img>
+        <img
+          className="product-image"
+          src={product.gallery[0]}
+          style={unstokedItemStyle}
+          alt=""></img>
         <span className="product-name" style={unstokedItemStyle}>{product.name}</span>
         <span className="product-price" style={unstokedItemStyle}>{currentCurrency.amount}{findAppropriateSymbol(choosenCurrency)}</span>
         {this.state.isCardHovered && (

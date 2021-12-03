@@ -97,9 +97,19 @@ button:hover {
   font-size: 18px;
 }
 
+.currency-container:hover {
+  cursor: pointer;
+}
+
 .currency-container img {
   margin-left: 5px;
+  transition: transform 0.2s ease;
 }
+
+/* .currency-container img:hover {
+  transform: rotate (180deg);
+  transition: transform 1s ease;
+} */
 
 .cart-icon {
   width: 20px;
@@ -617,6 +627,10 @@ button:hover {
   height: 175px;
   background-color: #FFFFFF;
   justify-content: space-around;
+}
+
+.currency-overlay:hover {
+  cursor: pointer;
 }
 
 .currency-overlay__currency-container {

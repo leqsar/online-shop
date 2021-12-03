@@ -26,7 +26,8 @@ class App extends React.Component {
       },
       openBag: false,
       choosenCurrency: 'USD',
-      currencyOverlayIsOpen: false
+      currencyOverlayIsOpen: false,
+      styleOfArrow: {}
     }
     this.handleProductClick = this.handleProductClick.bind(this);
     this.handleAddToCartClick = this.handleAddToCartClick.bind(this);
@@ -120,10 +121,11 @@ class App extends React.Component {
     })
   }
 
-  handleHeaderCartClick() {
+  handleHeaderCartClick(event) {
     this.setState({
       headerCartIconIsClicked: !this.state.headerCartIconIsClicked
-    })
+    });
+
   }
 
   hadleChangeAmountButtonClick(event) {
@@ -164,7 +166,8 @@ class App extends React.Component {
     this.setState({
       openBag: true,
       homePageIconIsClicked: false,
-      itemIsClicked: false
+      itemIsClicked: false,
+      headerCartIconIsClicked: false
     })
   }
 
@@ -174,14 +177,12 @@ class App extends React.Component {
       page = <ProductPage
                 choosenProduct={this.state.choosenProduct}
                 handleAddToCartClick={this.handleAddToCartClick}
-                onClick={this.handleRandomClick}
                 choosenCurrency={this.state.choosenCurrency}/>
     } else if(this.state.homePageIconIsClicked){
       page = <CategoryPage
                 categoryName={this.state.categoryName}
                 products={this.state.products}
                 handleProductClick={this.handleProductClick}
-                onClick={this.handleRandomClick}
                 choosenCurrency={this.state.choosenCurrency}/>
     } else if(this.state.openBag) {
       page = <BagPage
@@ -193,13 +194,13 @@ class App extends React.Component {
     return (
       <div className="App">
         <Header
-          onClick={this.handleRandomClick}
           handleHomePageClick={this.handleHomePageClick}
           handleHeaderCartClick={this.handleHeaderCartClick}
           handleCurrencyClick={this.handleCurrencyClick}
           cart={this.state.cart}
           headerCartIconIsClicked={this.state.headerCartIconIsClicked}
-          choosenCurrency={this.state.choosenCurrency}/>
+          choosenCurrency={this.state.choosenCurrency}
+          styleOfArrow={this.state.currencyOverlayIsOpen ? {transform: 'rotate(180deg)'} : {}} />
         {this.state.headerCartIconIsClicked && (
             <CartOverlay
               cart={this.state.cart}
@@ -208,7 +209,7 @@ class App extends React.Component {
               choosenCurrency={this.state.choosenCurrency}/>
         )}
         {this.state.headerCartIconIsClicked && (
-            <div className="opacity-overlay"></div>
+            <div className="opacity-overlay" onClick={this.handleRandomClick}></div>
         )}
         {this.state.currencyOverlayIsOpen && (
             <CurrencyOverlay

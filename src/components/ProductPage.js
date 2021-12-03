@@ -15,7 +15,9 @@ class ProductPage extends React.Component {
     const gallery = product.gallery.map((link, index) =>
       <img className="miniature" src={link} alt="" key={index}></img>
     )
-    const currentCurrency = product.prices.filter(price => price.currency===`${choosenCurrency}`)[0];
+    const currentCurrency = product.prices.filter(price =>
+      price.currency===`${choosenCurrency}`
+    )[0];
     if(product.inStock) {
       button = <button
                   className="product-page__add-to-card-button"
@@ -30,7 +32,10 @@ class ProductPage extends React.Component {
           <div className="product-page__miniature-gallery">
             {gallery}
           </div>
-          <img className="product-page__main-image" src={product.gallery[0]} alt="product-image"></img>
+          <img
+            className="product-page__main-image"
+            src={product.gallery[0]}
+            alt="product-image"></img>
         </div>
         <div className="product-page__information">
           <h1>{product.brand}</h1>

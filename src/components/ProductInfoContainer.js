@@ -17,7 +17,7 @@ class ProductInfoContainer extends React.Component {
           choosenProduct={this.props.productInfo.product}
           classPrefix={this.props.classPrefix}
           handleAttributeClick={this.props.handleAttributeClick}
-          choosenAttributes={this.props.choosenAttributes}/>
+          choosenAttributes={this.props.productInfo.choosenAttributes}/>
       </div>
     )
   }

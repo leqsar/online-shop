@@ -235,7 +235,8 @@ class App extends React.Component {
                 handleAddToCartClick={this.handleAddToCartClick}
                 choosenCurrency={this.state.choosenCurrency}
                 handleAttributeClick={this.handleAttributeClick}
-                choosenAttributes={this.state.choosenAttributes}/>
+                choosenAttributes={this.state.choosenAttributes}
+                cart={this.state.cart}/>
     } else if(this.state.homePageIconIsClicked){
       page = <CategoryPage
                 categoryName={this.state.categoryName}

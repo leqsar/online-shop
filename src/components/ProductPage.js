@@ -7,9 +7,17 @@ const ReactDOMServer = require('react-dom/server');
 
 class ProductPage extends React.Component {
   render () {
-    let button;
+    let button, choosenAttributes;
     const choosenCurrency = this.props.choosenCurrency;
     const product = this.props.choosenProduct;
+    const indexOfChoosenProduct = this.props.cart.products.findIndex(item =>
+      item.product.name === product.name
+    );
+    if(indexOfChoosenProduct !== -1) {
+      choosenAttributes = this.props.cart.products[indexOfChoosenProduct].choosenAttributes;
+    } else {
+      choosenAttributes = this.props.choosenAttributes;
+    }
     const htmlToReactParser = new HtmlToReactParser();
     const descriptionElement = htmlToReactParser.parse(product.description);
     const gallery = product.gallery.map((link, index) =>
@@ -44,7 +52,7 @@ class ProductPage extends React.Component {
             choosenProduct={product}
             classPrefix="product-page"
             handleAttributeClick={this.props.handleAttributeClick}
-            choosenAttributes={this.props.choosenAttributes}/>
+            choosenAttributes={choosenAttributes}/>
           <p className="product-page__price-heading">Price</p>
           <span className="product-page__price">{findAppropriateSymbol(choosenCurrency)}{currentCurrency.amount}</span>
           {button}

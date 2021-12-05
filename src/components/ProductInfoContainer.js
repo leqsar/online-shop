@@ -5,6 +5,7 @@ import findAppropriateSymbol from '../findAppropriateSymbol.js'
 class ProductInfoContainer extends React.Component {
   render() {
     const choosenCurrency = this.props.choosenCurrency;
+    console.log(choosenCurrency);
     const currentCurrency = this.props.productInfo.product.prices.filter(
       price => price.currency===`${choosenCurrency}`
     )[0];

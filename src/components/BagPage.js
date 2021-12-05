@@ -12,7 +12,8 @@ class BagPage extends React.Component {
         <li key={index} className="bag-page__product-wrapper">
           <ProductInfoContainer
             productInfo={item}
-            classPrefix={'bag-page'}/>
+            classPrefix={'bag-page'}
+            choosenCurrency={props.choosenCurrency}/>
           <ProductAmountSettingContainer
             productInfo={item}
             hadleChangeAmountButtonClick={props.hadleChangeAmountButtonClick}

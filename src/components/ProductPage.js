@@ -42,7 +42,9 @@ class ProductPage extends React.Component {
           <p className="product-page__name">{product.name}</p>
           <Attributes
             choosenProduct={product}
-            classPrefix="product-page"/>
+            classPrefix="product-page"
+            handleAttributeClick={this.props.handleAttributeClick}
+            choosenAttributes={this.props.choosenAttributes}/>
           <p className="product-page__price-heading">Price</p>
           <span className="product-page__price">{findAppropriateSymbol(choosenCurrency)}{currentCurrency.amount}</span>
           {button}

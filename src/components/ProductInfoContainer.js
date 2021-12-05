@@ -15,7 +15,9 @@ class ProductInfoContainer extends React.Component {
         <span>{findAppropriateSymbol(choosenCurrency)}{currentCurrency.amount}</span>
         <Attributes
           choosenProduct={this.props.productInfo.product}
-          classPrefix={this.props.classPrefix}/>
+          classPrefix={this.props.classPrefix}
+          handleAttributeClick={this.props.handleAttributeClick}
+          choosenAttributes={this.props.choosenAttributes}/>
       </div>
     )
   }

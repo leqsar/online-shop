@@ -5,7 +5,6 @@ class CategoryPage extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      isCardHovered : false,
       hoveredItemId: ''
     }
     this.createCardElement = this.createCardElement.bind(this);
@@ -15,14 +14,12 @@ class CategoryPage extends React.Component {
 
   handleMouseEnter(e) {
     this.setState({
-      isCardHovered: true,
       hoveredItemId: e.currentTarget.id
     });
   }
 
   handleMouseLeave(e) {
     this.setState({
-      isCardHovered: false,
       hoveredItemId: ''
     });
   }
@@ -30,7 +27,8 @@ class CategoryPage extends React.Component {
   createCardElement(product, hoveredItemId) {
     let warningAboutUnstockedItem, unstokedItemStyle;
     const choosenCurrency = this.props.choosenCurrency;
-    if (!product.inStock) {
+    const isInTheStock = product.inStock;
+    if (!isInTheStock) {
       warningAboutUnstockedItem = <span className="unstoked-warning">out of stock</span>;
       unstokedItemStyle = {opacity: "0.5"};
     }
@@ -56,7 +54,7 @@ class CategoryPage extends React.Component {
           alt=""></img>
         <span className="product-name" style={unstokedItemStyle}>{product.name}</span>
         <span className="product-price" style={unstokedItemStyle}>{currentCurrency.amount}{findAppropriateSymbol(choosenCurrency)}</span>
-        {hovered && (
+        {(hovered && isInTheStock) && (
           <div className="category-page__add-to-card-button">
             <img src="/images/white-cart.svg" alt="cart-icon" className="category-page__add-to-card-icon"></img>
           </div>

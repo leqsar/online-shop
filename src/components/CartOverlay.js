@@ -13,7 +13,9 @@ class CartOverlay extends React.Component {
           <ProductInfoContainer
             productInfo={item}
             classPrefix={'cart-overlay'}
-            choosenCurrency={props.choosenCurrency}/>
+            choosenCurrency={props.choosenCurrency}
+            handleAttributeClick={props.handleAttributeClick}
+            choosenAttributes={props.choosenAttributes}/>
           <ProductAmountSettingContainer
             productInfo={item}
             hadleChangeAmountButtonClick={props.hadleChangeAmountButtonClick}

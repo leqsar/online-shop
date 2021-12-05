@@ -29,7 +29,9 @@ class App extends React.Component {
       choosenCurrency: 'USD',
       currencyOverlayIsOpen: false,
       styleOfArrow: {},
-      choosenAttributes: []
+      choosenAttributes: [],
+      categoriesNames: [],
+      allCategories: []
     }
     this.handleProductClick = this.handleProductClick.bind(this);
     this.handleAddToCartClick = this.handleAddToCartClick.bind(this);
@@ -41,6 +43,7 @@ class App extends React.Component {
     this.handleCurrencyClick = this.handleCurrencyClick.bind(this);
     this.handleCurrencyChangeClick = this.handleCurrencyChangeClick.bind(this);
     this.handleAttributeClick = this.handleAttributeClick.bind(this);
+    this.handleCategoryClick = this.handleCategoryClick.bind(this);
   }
 
   componentDidMount() {
@@ -49,11 +52,27 @@ class App extends React.Component {
       query: gql`${CATEGORYQUERY}`
     })
     .then((result) => {
+      const categoriesName = this.state.categoriesNames.concat();
+      result.data.categories.forEach((category) => {
+        categoriesName.push(category.name);
+      });
       this.setState({
-        categoryName: result.data.categories[1].name,
-        products: result.data.categories[1].products
+        categoryName: result.data.categories[0].name,
+        allCategories: result.data.categories,
+        products: result.data.categories[0].products,
+        categoriesNames: categoriesName
       })
     });
+  }
+
+  handleCategoryClick(event) {
+    const chosenCategoryIndex = this.state.allCategories.findIndex(category =>
+      category.name===event.target.textContent
+    );
+    this.setState({
+      products: this.state.allCategories[chosenCategoryIndex].products,
+      categoryName: event.target.textContent
+    })
   }
 
   handleProductClick(e) {
@@ -259,7 +278,10 @@ class App extends React.Component {
           cart={this.state.cart}
           headerCartIconIsClicked={this.state.headerCartIconIsClicked}
           choosenCurrency={this.state.choosenCurrency}
-          styleOfArrow={this.state.currencyOverlayIsOpen ? {transform: 'rotate(180deg)'} : {}} />
+          styleOfArrow={this.state.currencyOverlayIsOpen ? {transform: 'rotate(180deg)'} : {}}
+          categoriesNames={this.state.categoriesNames}
+          categoryName={this.state.categoryName}
+          handleCategoryClick={this.handleCategoryClick}/>
         {this.state.headerCartIconIsClicked && (
             <CartOverlay
               cart={this.state.cart}

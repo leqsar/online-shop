@@ -4,14 +4,24 @@ import findAppropriateSymbol from '../findAppropriateSymbol.js'
 class Header extends React.Component {
   render() {
     const currency = findAppropriateSymbol(this.props.choosenCurrency);
+    const props = this.props;
+    const categoriesMenu = this.props.categoriesNames.map(function(categoryName){
+      let chosenClassName;
+      if(categoryName === props.categoryName) {
+        chosenClassName = 'chosen';
+      } else {
+        chosenClassName = '';
+      }
+      return (<li
+                className={chosenClassName}
+                onClick={props.handleCategoryClick}>{categoryName}</li>)
+    })
     return(
       <React.Fragment>
         <header>
           <nav className="menu">
             <ul>
-              <li>Women</li>
-              <li>Men</li>
-              <li>Kids</li>
+              {categoriesMenu}
             </ul>
           </nav>
           <img

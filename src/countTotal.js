@@ -9,5 +9,5 @@ export default function countTotal(products, choosenCurrency) {
   const newtotal = arrayWithPrices.reduce((previousValue, currentValue) =>
     previousValue + currentValue
   ,0);
-  return newtotal;
+  return Math.trunc(newtotal*100)/100;
 }

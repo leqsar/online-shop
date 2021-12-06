@@ -72,7 +72,8 @@ class App extends React.Component {
     this.setState({
       products: this.state.allCategories[chosenCategoryIndex].products,
       categoryName: event.target.textContent,
-      homePageIconIsClicked: true
+      homePageIconIsClicked: true,
+      itemIsClicked: false
     })
   }
 
@@ -135,9 +136,6 @@ class App extends React.Component {
           },
         }
       });
-    } else {
-      //TODO: change it to right notification
-      console.log('You cannot add product');
     }
   }
 
@@ -217,8 +215,7 @@ class App extends React.Component {
   }
 
     handleAttributeClick(event) {
-      let indexOfExistingAttribute,
-          isExist = false;
+      let indexOfExistingAttribute;
       const choosenAttributes = this.state.choosenAttributes.concat();
       const choosenAttribute = {
         name: event.target.dataset.attribute,
@@ -236,9 +233,26 @@ class App extends React.Component {
           choosenAttributes.push(choosenAttribute);
         }
       }
-      this.setState({
-        choosenAttributes: choosenAttributes
-      })
+      const products = this.state.cart.products.concat();
+      const indexOfChoosenProduct = products.findIndex(item =>
+        item.product.name === this.state.choosenProduct.name
+      );
+      if(indexOfChoosenProduct !== -1) {
+        Object.defineProperty(products[indexOfChoosenProduct], 'choosenAttributes', {
+          value: choosenAttributes
+        });
+        this.setState({
+          cart: {
+            products: products,
+            total: this.state.cart.total,
+            amountOfItems: this.state.cart.AmountOfItems
+          }
+        })
+      } else {
+        this.setState({
+          choosenAttributes: choosenAttributes
+        })
+      }
     }
 
   render() {

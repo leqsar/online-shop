@@ -295,7 +295,8 @@ class App extends React.Component {
         )}
         {this.state.currencyOverlayIsOpen && (
             <CurrencyOverlay
-              handleCurrencyChangeClick={this.handleCurrencyChangeClick}/>
+              handleCurrencyChangeClick={this.handleCurrencyChangeClick}
+            />
         )}
         {page}
       </div>

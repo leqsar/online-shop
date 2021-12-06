@@ -21,6 +21,7 @@ const CATEGORYQUERY = `query {
   }
 }`;
 const PRODUCTQUERY = `{
+    id,
     name,
     brand,
     prices {

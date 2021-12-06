@@ -9,7 +9,7 @@ class CartOverlay extends React.Component {
     const productsList = this.props.cart.products.map(function (item, index) {
       let attributes;
       return (
-        <li key={index} className="cart-overlay__product-wrapper">
+        <li key={item.product.id} className="cart-overlay__product-wrapper">
           <ProductInfoContainer
             productInfo={item}
             classPrefix={'cart-overlay'}

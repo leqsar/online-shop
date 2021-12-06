@@ -9,7 +9,7 @@ class BagPage extends React.Component {
     const groupOfProducts = this.props.cart.products.map(function (item, index) {
       let attributes;
       return (
-        <li key={index} className="bag-page__product-wrapper">
+        <li key={item.product.id} className="bag-page__product-wrapper">
           <ProductInfoContainer
             productInfo={item}
             classPrefix={'bag-page'}

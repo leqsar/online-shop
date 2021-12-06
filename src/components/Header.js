@@ -14,7 +14,10 @@ class Header extends React.Component {
       }
       return (<li
                 className={chosenClassName}
-                onClick={props.handleCategoryClick}>{categoryName}</li>)
+                onClick={props.handleCategoryClick}
+                key={categoryName}>
+              {categoryName}</li>
+      )
     })
     return(
       <React.Fragment>

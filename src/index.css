@@ -75,16 +75,6 @@ button:hover {
   background: #5ECE7B;
 }
 
-/* .menu ul li:nth-child(1)::after {
-  content: '';
-  display: block;
-  margin-top: 30px;
-  height: 1px;
-  width: 65px;
-  padding: 0 12px;
-  background: #5ECE7B;
-} */
-
 .store-icon {
   width: 30px;
   height: 30px;

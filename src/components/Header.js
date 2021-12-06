@@ -28,7 +28,8 @@ class Header extends React.Component {
             className="store-icon"
             src="/images/store-icon.svg"
             onClick={this.props.handleHomePageClick}
-            alt=""></img>
+            alt="">
+          </img>
           <div className="currency-container" onClick={this.props.handleCurrencyClick}>
             <span>{currency}</span>
             <img src="/images/arrow.svg" alt="currency-icon" style={this.props.styleOfArrow}></img>
@@ -37,7 +38,8 @@ class Header extends React.Component {
             className="cart-icon"
             src="/images/cart.svg"
             onClick={this.props.handleHeaderCartClick}
-            alt="cart-icon"></img>
+            alt="cart-icon">
+          </img>
           {this.props.headerCartIconIsClicked && (
             <p className="header__totalOfItemsIcon">{this.props.cart.amountOfItems}</p>)
           }

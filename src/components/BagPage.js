@@ -13,11 +13,13 @@ class BagPage extends React.Component {
           <ProductInfoContainer
             productInfo={item}
             classPrefix={'bag-page'}
-            choosenCurrency={props.choosenCurrency}/>
+            choosenCurrency={props.choosenCurrency}
+          />
           <ProductAmountSettingContainer
             productInfo={item}
             hadleChangeAmountButtonClick={props.hadleChangeAmountButtonClick}
-            classPrefix={'bag-page'}/>
+            classPrefix={'bag-page'}
+          />
         </li>
       )
     })

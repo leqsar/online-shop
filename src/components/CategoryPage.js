@@ -51,7 +51,8 @@ class CategoryPage extends React.Component {
           className="product-image"
           src={product.gallery[0]}
           style={unstokedItemStyle}
-          alt=""></img>
+          alt=""
+        ></img>
         <span className="product-name" style={unstokedItemStyle}>{product.name}</span>
         <span className="product-price" style={unstokedItemStyle}>{currentCurrency.amount}{findAppropriateSymbol(choosenCurrency)}</span>
         {(hovered && isInTheStock) && (
@@ -65,7 +66,9 @@ class CategoryPage extends React.Component {
 
   render() {
     const productsArray = this.props.products;
-    const listProducts = productsArray.map((product) => this.createCardElement(product, this.state.hoveredItemId));
+    const listProducts = productsArray.map(product => 
+      this.createCardElement(product, this.state.hoveredItemId)
+    );
     return (
       <div className="category-page" onClick={this.props.onClick}>
         <h1>{this.props.categoryName}</h1>

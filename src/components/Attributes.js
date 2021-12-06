@@ -11,7 +11,7 @@ class Attributes extends React.Component {
 
   render() {
     let isSwatch, button;
-    const that = this;
+    const styleOfClickedAttribute = this.styleOfClickedAttribute;
     const props = this.props;
     const product = props.choosenProduct;
     const listOfAttributes = product.attributes.map(function(attribute, index) {
@@ -25,13 +25,15 @@ class Attributes extends React.Component {
                     key={index}
                     style={{background: `${item.value}`}}
                     onClick={props.handleAttributeClick}
-                    data-attribute={attribute.name}></li>
+                    data-attribute={attribute.name}
+                  ></li>
         } else {
           return <li
                     key={index}
                     onClick={props.handleAttributeClick}
                     data-attribute={attribute.name}
-                    style={indexOfAttribute !== -1 ? that.styleOfClickedAttribute : {}}>{item.value}</li>
+                    style={indexOfAttribute !== -1 ? styleOfClickedAttribute : {}}
+                  >{item.value}</li>
         }
       })
       return (

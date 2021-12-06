@@ -15,11 +15,13 @@ class CartOverlay extends React.Component {
             classPrefix={'cart-overlay'}
             choosenCurrency={props.choosenCurrency}
             handleAttributeClick={props.handleAttributeClick}
-            choosenAttributes={props.choosenAttributes}/>
+            choosenAttributes={props.choosenAttributes}
+          />
           <ProductAmountSettingContainer
             productInfo={item}
             hadleChangeAmountButtonClick={props.hadleChangeAmountButtonClick}
-            classPrefix={'cart-overlay'}/>
+            classPrefix={'cart-overlay'}
+          />
         </li>
       )
     })
@@ -39,7 +41,8 @@ class CartOverlay extends React.Component {
         <div className="cart-overlay__buttons-wrapper">
           <button
             className="cart-overlay__viewBag-button"
-            onClick={this.props.handleViewBagButton}>view bag</button>
+            onClick={this.props.handleViewBagButton}
+          >view bag</button>
           <button className="cart-overlay__checkOut-button">check out</button>
         </div>
       </div>

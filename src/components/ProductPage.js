@@ -29,7 +29,8 @@ class ProductPage extends React.Component {
     if(product.inStock) {
       button = <button
                   className="product-page__add-to-card-button"
-                  onClick={this.props.handleAddToCartClick}>add to cart</button>
+                  onClick={this.props.handleAddToCartClick}
+                >add to cart</button>
     } else {
       button = <button className="product-page__not-in-stock-button">not in stock</button>
     }
@@ -43,7 +44,8 @@ class ProductPage extends React.Component {
           <img
             className="product-page__main-image"
             src={product.gallery[0]}
-            alt="product-image"></img>
+            alt="product-image">
+          </img>
         </div>
         <div className="product-page__information">
           <h1>{product.brand}</h1>
@@ -52,7 +54,8 @@ class ProductPage extends React.Component {
             choosenProduct={product}
             classPrefix="product-page"
             handleAttributeClick={this.props.handleAttributeClick}
-            choosenAttributes={choosenAttributes}/>
+            choosenAttributes={choosenAttributes}
+          />
           <p className="product-page__price-heading">Price</p>
           <span className="product-page__price">{findAppropriateSymbol(choosenCurrency)}{currentCurrency.amount}</span>
           {button}

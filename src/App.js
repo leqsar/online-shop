@@ -71,7 +71,8 @@ class App extends React.Component {
     );
     this.setState({
       products: this.state.allCategories[chosenCategoryIndex].products,
-      categoryName: event.target.textContent
+      categoryName: event.target.textContent,
+      homePageIconIsClicked: true
     })
   }
 

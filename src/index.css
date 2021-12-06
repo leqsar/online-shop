@@ -30,12 +30,14 @@ header {
   height: 80px;
 }
 
+button:hover,
+.menu ul li,
 header img:hover,
-.product-card {
-  cursor: pointer;
-}
-
-button:hover {
+.product-card:hover,
+.currency-container:hover,
+.product-page__attribute-items li:hover,
+.cart-overlay__attribute-items li:hover,
+.currency-overlay:hover {
   cursor: pointer;
 }
 
@@ -100,10 +102,6 @@ button:hover {
   margin-left: 534px;
   margin-top: 28.5px;
   font-size: 18px;
-}
-
-.currency-container:hover {
-  cursor: pointer;
 }
 
 .currency-container img {
@@ -272,10 +270,6 @@ button:hover {
   width: 63px;
   height: 45px;
   border: 1px solid #1D1F22;
-}
-
-.product-page__attribute-items li:hover {
-  cursor: pointer;
 }
 
 .product-page__price-heading {
@@ -479,10 +473,6 @@ button:hover {
   font-size: 10px;
 }
 
-.cart-overlay__attribute-items li:hover {
-  cursor: pointer;
-}
-
 .total-wrapper {
   margin-top: 52px;
   display: flex;
@@ -635,10 +625,6 @@ button:hover {
   height: 175px;
   background-color: #FFFFFF;
   justify-content: space-around;
-}
-
-.currency-overlay:hover {
-  cursor: pointer;
 }
 
 .currency-overlay__currency-container {

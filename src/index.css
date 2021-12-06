@@ -629,6 +629,7 @@ header img:hover,
   height: 175px;
   background-color: #FFFFFF;
   justify-content: space-around;
+  z-index: 4;
 }
 
 .currency-overlay__currency-container {
